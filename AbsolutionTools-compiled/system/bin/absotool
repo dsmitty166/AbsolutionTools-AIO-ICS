@@ -1,0 +1,1031 @@
+#!/system/bin/sh
+#
+# ABTOOL - by AlienMind & flappjaxxx
+# ABTOOL.apk companion scripts
+# It provides an execution interface for controlled commands,
+# plus a configuration interface that allows modifying ABTOOL.apk
+# interface (adding and removing tabs and options)
+#
+# TODO:
+#
+# * UV scripts should look for configs on an sdcard folder
+# * There are still some commands harcoded into the app
+#   (labeled with *). It's needed to make them optional too
+#   and exported via ABTOOL setup
+#
+ABTOOL_VERSION="1.00" # Script version
+HELP="Usage: $0 <cmd> ..."
+### Only root allowed
+WHO=`whoami 2>&1`
+if [ "$WHO" != "root" -a "$WHO" != "whoami: unknown uid 0" ]; then
+  echo "Must be root"
+  exit 1
+fi
+
+if [ "$1" = "" ]; then
+  echo "$HELP"
+  exit 2
+fi
+
+die () {
+  echo $@
+  exit 1
+}
+
+
+ListCommands() {
+  printf "ABTOOL_VERSION:$ABTOOL_VERSION\n"
+  printf "$SUPPORTED_COMMANDS\n"
+  printf "$CATEGORIES\n"
+  printf "$CATEGORY_COMMANDS"
+  ( printf "$COMMAND_OPTIONS" ; printf "$COMMAND_DESCRIPTIONS" ) | sort
+}
+
+Upgrade() {
+  local MODE=$1
+  case $MODE in
+    "version")      PrintVersion ;;
+    "checkversion") CheckVersion ;;
+    "ABTOOL")      UpgradeABTOOL ;;
+  esac
+}
+
+PrintVersion() {
+  printf "$ABTOOL_VERSION"
+}
+
+190dpi() {
+mount -o remount,rw /system
+/system/xbin/sed -i 's/ro.sf.lcd_density=240/ro.sf.lcd_density=190/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=230/ro.sf.lcd_density=190/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=220/ro.sf.lcd_density=190/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=210/ro.sf.lcd_density=190/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=200/ro.sf.lcd_density=190/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=192/ro.sf.lcd_density=190/g' /system/build.prop
+mount -o remount,ro /system
+echo LCD Density set to 190dpi, Reboot to Activate!
+}
+
+192dpi() {
+  mount -o remount,rw /system
+/system/xbin/sed -i 's/ro.sf.lcd_density=240/ro.sf.lcd_density=192/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=230/ro.sf.lcd_density=192/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=220/ro.sf.lcd_density=192/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=210/ro.sf.lcd_density=192/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=200/ro.sf.lcd_density=192/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=190/ro.sf.lcd_density=192/g' /system/build.prop
+mount -o remount,ro /system
+echo LCD Density set to 192dpi, Reboot to Activate!
+}
+
+200dpi() {
+mount -o remount,rw /system
+/system/xbin/sed -i 's/ro.sf.lcd_density=240/ro.sf.lcd_density=200/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=230/ro.sf.lcd_density=200/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=220/ro.sf.lcd_density=200/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=210/ro.sf.lcd_density=200/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=190/ro.sf.lcd_density=200/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=192/ro.sf.lcd_density=200/g' /system/build.prop
+mount -o remount,ro /system
+echo LCD Density set to 200dpi, Reboot to Activate!
+}
+
+210dpi() {
+mount -o remount,rw /system
+/system/xbin/sed -i 's/ro.sf.lcd_density=240/ro.sf.lcd_density=210/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=230/ro.sf.lcd_density=210/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=220/ro.sf.lcd_density=210/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=200/ro.sf.lcd_density=210/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=190/ro.sf.lcd_density=210/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=192/ro.sf.lcd_density=210/g' /system/build.prop
+mount -o remount,ro /system
+echo LCD Density set to 210dpi, Reboot to Activate!
+}
+
+220dpi() {
+mount -o remount,rw /system
+/system/xbin/sed -i 's/ro.sf.lcd_density=240/ro.sf.lcd_density=220/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=230/ro.sf.lcd_density=220/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=210/ro.sf.lcd_density=220/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=200/ro.sf.lcd_density=220/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=190/ro.sf.lcd_density=220/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=192/ro.sf.lcd_density=220/g' /system/build.prop
+mount -o remount,ro /system
+echo LCD Density set to 220dpi, Reboot to Activate!
+}
+
+240dpi() {
+mount -o remount,rw /system
+/system/xbin/sed -i 's/ro.sf.lcd_density=230/ro.sf.lcd_density=240/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=220/ro.sf.lcd_density=240/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=210/ro.sf.lcd_density=240/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=200/ro.sf.lcd_density=240/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=190/ro.sf.lcd_density=240/g' /system/build.prop
+/system/xbin/sed -i 's/ro.sf.lcd_density=192/ro.sf.lcd_density=240/g' /system/build.prop
+mount -o remount,ro /system
+echo LCD Density set to 240dpi - Stock Settings, Reboot to Activate!
+}
+
+absorecovery() {
+FILE=abso4ext.tgz
+MD5SUM=12de2c42b28dd97a0b96f06e88834bf1
+URL="http://theandroidcollective.org/Inspire/Absolution/updates/abso4ext.tgz"
+if [ ! -d /sdcard/download/rectmp ]; then
+  MK=1
+  mkdir -p /sdcard/download/rectmp
+fi
+cd /sdcard/download/rectmp
+if [ -f "$FILE" ]; then
+MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" != "1" ]; then 
+echo "Downloading Package Be Patient"
+rm  "$FILE"
+wget "$URL"
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" = "1" ]; then
+  mount -o remount,rw /system
+  cd /sdcard/download/rectmp
+echo "Extracting Package"
+  tar -xzf abso4ext.tgz
+echo "Flashing Recovery"
+  cp recovery.img /sdcard/recovery.img
+flash_image recovery /sdcard/recovery.img
+  cd /sdcard/download/rectmp
+echo "Copying Data"
+  cp -R /sdcard/download/rectmp/cwtheme/4ext /system
+echo "Cleaning up"
+    mount -o remount,ro /system
+  cd - >/dev/null 2>&1
+  echo "Done! Please Reboot and Enjoy Absolution Touch Recovery"
+else
+  echo "Failed to Install Absolution Touch Recovery"
+  echo "Try Again"
+  exit 1
+fi
+rm  /sdcard/recovery.img
+rm  /sdcard/download/rectmp/$FILE
+rm -R /sdcard/download/rectmp
+
+if [ "$MK" = "1" ]; then
+  rm -R /sdcard/download/rectmp 
+fi
+}
+
+agguvon() {
+mount -o remount,rw /system
+rm  /system/etc/init.d/99voltages
+rm  /system/etc/init.d/01kstune
+cp /system/media/uvscripts/75uv/99voltages /system/etc/init.d/99voltages
+chmod 777 /system/etc/init.d/99voltages
+/system/etc/init.d/99voltages
+echo 'Absolution Aggressive Undervolting -75mV' > /system/media/uvscripts/undervolt
+mount -o remount,ro /system
+echo Activated Absolution Aggressive Undervolting -75mV!
+}
+
+callrecorder() {
+FILE=CallRecorder_v.1.0.27_alpha_build05.apk
+MD5SUM=711b5324d5bbe85667bf4ea4beb87bf6
+URL="http://theandroidcollective.org/Inspire/Absolution/updates/CallRecorder_v.1.0.27_alpha_build05.apk"
+if [ ! -d /sdcard/tmp ]; then
+  MK=1
+  mkdir -p /sdcard/tmp
+fi
+cd /sdcard/tmp
+if [ -f "$FILE" ]; then
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" != "1" ]; then
+  rm  "$FILE"
+  wget "$URL"
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" = "1" ]; then
+  mount -o remount,rw /system
+  cd /
+  rm  /data/app/*callrecorder*
+  rm  /data/app/*CallRecorder*
+  cp /sdcard/tmp/CallRecorder_v.1.0.27_alpha_build05.apk /data/app/CallRecorder_v.1.0.27_alpha_build05.apk
+  chmod 644 /data/app/CallRecorder_v.1.0.27_alpha_build05.apk
+  mount -o remount,ro /system
+  cd - >/dev/null 2>&1
+  echo "Done! Enjoy Recording Calls!"
+else
+  echo "Failed to download / install Call Recorder"
+  exit 1
+fi
+rm  /sdcard/tmp/$FILE
+
+if [ "$MK" = "1" ]; then
+  rmdir /sdcard/tmp 
+fi
+}
+
+collrecovery() {
+FILE=coll4ext.tgz
+MD5SUM=c0c4d7e56ac8bda0abe0ebfef593e6e2
+URL="http://theandroidcollective.org/Inspire/Absolution/updates/coll4ext.tgz"
+if [ ! -d /sdcard/download/rectmp ]; then
+  MK=1
+  mkdir -p /sdcard/download/rectmp
+fi
+cd /sdcard/download/rectmp
+if [ -f "$FILE" ]; then
+MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" != "1" ]; then 
+echo "Downloading Package Be Patient"
+rm  "$FILE"
+wget "$URL"
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" = "1" ]; then
+  mount -o remount,rw /system
+  cd /sdcard/download/rectmp
+echo "Extracting Package"
+  tar -xzf coll4ext.tgz
+echo "Flashing Recovery"
+  cp recovery.img /sdcard/recovery.img
+flash_image recovery /sdcard/recovery.img
+  cd /sdcard/download/rectmp
+echo "Copying Data"
+  cp -R /sdcard/download/rectmp/cttheme/4ext /system
+echo "Cleaning up"
+    mount -o remount,ro /system
+  cd - >/dev/null 2>&1
+  echo "Done! Please Reboot and Enjoy The Collective Touch Recovery"
+else
+  echo "Failed to Install The Collective Touch Recovery"
+  echo "Try Again"
+  exit 1
+fi
+rm  /sdcard/recovery.img
+rm  /sdcard/download/rectmp/$FILE
+rm -R /sdcard/download/rectmp
+
+if [ "$MK" = "1" ]; then
+  rm -R /sdcard/download/rectmp 
+fi
+}
+
+desirehd() {
+mount -o remount,rw /system
+/system/xbin/sed -i 's/Inspire 4G/Desire HD/g' /system/build.prop
+mount -o remount,ro /system
+echo Desire HD Branded, Reboot to Activate!
+}
+
+dspmanager() {
+mount -o remount,rw /system
+rm  /data/app/VolumePlusFree.apk
+rm  /data/app/com.FREE.android.lvh*.apk
+cp /system/media/dsp/DSPManager.apk /system/app/DSPManager.apk
+chmod 644 /system/app/DSPManager.apk
+mount -o remount,ro /system
+echo Installed DSPManager!
+}
+
+flappjaxxx() {
+mount -o remount,rw /system
+chmod 755 /system/xbin/andrev_oc
+killall andrev_oc
+echo 'conservative' > /system/etc/andrev_oc/sleep_gov
+echo '122000' > /system/etc/andrev_oc/sleep_max
+echo '122000' > /system/etc/andrev_oc/sleep_min
+echo 'ondemand' > /system/etc/andrev_oc/wake_gov
+echo '1152000' > /system/etc/andrev_oc/wake_max
+echo '122000' > /system/etc/andrev_oc/wake_min
+rm  /system/etc/init.d/84fj
+rm  /system/etc/init.d/84fjwmax
+rm  /system/etc/init.d/84fjwmin
+rm  /system/etc/init.d/84fjwgov
+cp -f /system/media/uvscripts/flappjaxxx/84fj /system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/84fj
+/system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/83aroc
+/system/etc/init.d/83aroc
+echo 'flappjaxxx' > /system/media/uvscripts/profile
+mount -o remount,ro /system
+echo flappjaxxx Custom Profile!
+echo Sleep = conservative 122/122
+echo Wake = ondemand 122/1152
+}
+
+gallery3d() {
+FILE=Gallery3D.apk
+MD5SUM=68a7ac66f87f812560291517c868a8c2
+URL="http://theandroidcollective.org/Inspire/Absolution/updates/Gallery3D.apk"
+if [ ! -d /sdcard/tmp ]; then
+  MK=1
+  mkdir -p /sdcard/tmp
+fi
+cd /sdcard/tmp
+if [ -f "$FILE" ]; then
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" != "1" ]; then
+  rm  "$FILE"
+  wget "$URL"
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" = "1" ]; then
+  mount -o remount,rw /system
+  cd /
+  cp /sdcard/tmp/Gallery3D.apk /data/app/Gallery3D.apk
+  chmod 644 /data/app/Gallery3D.apk
+  mount -o remount,ro /system
+  cd - >/dev/null 2>&1
+  echo "Done! Enjoy Gallery3D"
+else
+  echo "Failed to download / install Gallery3D"
+  exit 1
+fi
+rm  /sdcard/tmp/$FILE
+
+if [ "$MK" = "1" ]; then
+  rmdir /sdcard/tmp 
+fi
+}
+
+googleapps() {
+FILE=gapps4.tgz
+MD5SUM=dd3603a5a93abf16a2ad4ac8af72b745
+URL="http://theandroidcollective.org/Inspire/Absolution/updates/gapps4.tgz"
+if [ ! -d /sdcard/download/gootmp ]; then
+  MK=1
+  mkdir -p /sdcard/download/gootmp
+fi
+cd /sdcard/download
+if [ -f "$FILE" ]; then
+MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" != "1" ]; then 
+echo "Downloading Package Be Patient"
+rm  "$FILE"
+wget "$URL"
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" = "1" ]; then
+  mount -o remount,rw /system
+  cd /
+  rm  /data/app/*com.google.android*
+  rm  /data/app/*com.android.vending*
+  cd /sdcard/download
+  mv gapps4.tgz /sdcard/download/gootmp/gapps4.tgz
+  cd /sdcard/download/gootmp
+echo "Extracting Package"
+  tar -xvzf gapps4.tgz
+echo "Copying Data"
+  #cp /sdcard/download/gootmp/com.android.vending-2.apk /data/app/com.android.vending-2.apk
+  cp /sdcard/download/gootmp/com.google.android.apps.books-1.apk /data/app/com.google.android.apps.books-1.apk
+  cp /sdcard/download/gootmp/com.google.android.apps.chrometophone-1.apk /data/app/com.google.android.apps.chrometophone-1.apk
+  cp /sdcard/download/gootmp/com.google.android.apps.googlevoice-2.apk /data/app/com.google.android.apps.googlevoice-2.apk
+  #cp /sdcard/download/gootmp/com.google.android.apps.maps-1.apk /data/app/com.google.android.apps.maps-1.apk
+  cp /sdcard/download/gootmp/com.google.android.apps.plus-1.apk /data/app/com.google.android.apps.plus-1.apk
+  cp /sdcard/download/gootmp/com.google.android.apps.shopper-2.apk /data/app/com.google.android.apps.shopper-2.apk
+  cp /sdcard/download/gootmp/com.google.android.apps.unveil-2.apk /data/app/com.google.android.apps.unveil-2.apk
+  #cp /sdcard/download/gootmp/com.google.android.gm-1.apk /data/app/com.google.android.gm-1.apk
+  #cp /sdcard/download/gootmp/com.google.android.street-2.apk /data/app/com.google.android.street-2.apk
+  #cp /sdcard/download/gootmp/com.google.android.voicesearch-1.apk /data/app/com.google.android.voicesearch-1.apk
+  #cp /sdcard/download/gootmp/com.google.android.youtube-2.apk /data/app/com.google.android.youtube-2.apk
+echo "Setting Permissions"
+  #chmod 644 /data/app/com.android.vending-2.apk
+  chmod 644 /data/app/com.google.android.apps.books-1.apk
+  chmod 644 /data/app/com.google.android.apps.chrometophone-1.apk
+  chmod 644 /data/app/com.google.android.apps.googlevoice-2.apk
+  #chmod 644 /data/app/com.google.android.apps.maps-1.apk
+  chmod 644 /data/app/com.google.android.apps.plus-1.apk
+  chmod 644 /data/app/com.google.android.apps.shopper-2.apk
+  chmod 644 /data/app/com.google.android.apps.unveil-2.apk
+  #chmod 644 /data/app/com.google.android.gm-1.apk
+  #chmod 644 /data/app/com.google.android.street-2.apk
+  #chmod 644 /data/app/com.google.android.voicesearch-1.apk
+  #chmod 644 /data/app/com.google.android.youtube-2.apk
+
+  mount -o remount,ro /system
+  cd - >/dev/null 2>&1
+  echo "Done! Please Reboot and Enjoy Google Apps"
+else
+  echo "Failed to Install Google Apps"
+  echo "Try Again"
+  exit 1
+fi
+rm  /sdcard/download/$FILE
+rm  /sdcard/download/gootmp/$FILE
+rm -R /sdcard/download/gootmp
+
+if [ "$MK" = "1" ]; then
+  rm -R /sdcard/download/gootmp 
+fi
+}
+
+gpsatt() {
+mount -o remount,rw /system
+rm  /system/etc/SuplRootCert
+rm  /system/etc/gps.conf
+cp /system/media/gpscripts/att/gps.conf /system/etc/gps.conf
+cp /system/media/gpscripts/att/SuplRootCert /system/etc/SuplRootCert
+mount -o remount,ro /system
+echo Installed ATT GPS Config!
+}
+
+gpsgeneric() {
+mount -o remount,rw /system
+rm  /system/etc/SuplRootCert
+rm  /system/etc/gps.conf
+cp /system/media/gpscripts/generic/gps.conf /system/etc/gps.conf
+cp /system/media/gpscripts/generic/SuplRootCert /system/etc/SuplRootCert
+mount -o remount,ro /system
+echo Installed Generic GPS Config!
+}
+
+gpsstock() {
+mount -o remount,rw /system
+rm  /system/etc/gps.conf
+rm  /system/etc/SuplRootCert
+cp /system/media/gpscripts/stock/gps.conf /system/etc/gps.conf
+mount -o remount,ro /system
+echo Activated GPS Configuration Stock Settings!
+}
+
+gpstmobile() {
+mount -o remount,rw /system
+rm  /system/etc/SuplRootCert
+rm  /system/etc/gps.conf
+cp /system/media/gpscripts/tmobile/gps.conf /system/etc/gps.conf
+cp /system/media/gpscripts/tmobile/SuplRootCert /system/etc/SuplRootCert
+mount -o remount,ro /system
+echo Installed T-Mobile GPS Config!
+}
+
+gpsww() {
+mount -o remount,rw /system
+rm  /system/etc/gps.conf
+rm  /system/etc/SuplRootCert
+cp /system/media/gpscripts/worldwide/gps.conf /system/etc/gps.conf
+mount -o remount,ro /system
+echo Activated GPS Configuration WorldWide Settings!
+}
+
+gpswwa() {
+mount -o remount,rw /system
+rm  /system/etc/gps.conf
+rm  /system/etc/SuplRootCert
+cp /system/media/gpscripts/worldwidealt/gps.conf /system/etc/gps.conf
+mount -o remount,ro /system
+echo Activated GPS Configuration DHD WorldWide Users!
+}
+
+inspire4g() {
+mount -o remount,rw /system
+/system/xbin/sed -i 's/Desire HD/Inspire 4G/g' /system/build.prop
+mount -o remount,ro /system
+echo Inspire 4G Branded, Reboot to Activate!
+}
+
+liteuvon() {
+mount -o remount,rw /system
+rm  /system/etc/init.d/99voltages
+rm  /system/etc/init.d/01kstune
+cp /system/media/uvscripts/25uv/99voltages /system/etc/init.d/99voltages
+chmod 777 /system/etc/init.d/99voltages
+/system/etc/init.d/99voltages
+echo 'Absolution Lite Undervolting -25mV' > /system/media/uvscripts/undervolt
+mount -o remount,ro /system
+echo Activated Absolution Lite Undervolting -25mV!
+}
+
+lonestar() {
+mount -o remount,rw /system
+chmod 755 /system/xbin/andrev_oc
+killall andrev_oc
+echo 'conservative' > /system/etc/andrev_oc/sleep_gov
+echo '122000' > /system/etc/andrev_oc/sleep_max
+echo '122000' > /system/etc/andrev_oc/sleep_min
+echo 'ondemandX' > /system/etc/andrev_oc/wake_gov
+echo '1305600' > /system/etc/andrev_oc/wake_max
+echo '230400' > /system/etc/andrev_oc/wake_min
+rm  /system/etc/init.d/84fj
+rm  /system/etc/init.d/84fjwmax
+rm  /system/etc/init.d/84fjwmin
+rm  /system/etc/init.d/84fjwgov
+cp -f /system/media/uvscripts/lonestar/84fj /system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/84fj
+/system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/83aroc
+/system/etc/init.d/83aroc
+echo 'Lone Star' > /system/media/uvscripts/profile
+mount -o remount,ro /system
+stagefright -a -o /system/media/uvscripts/lonestar/lonestar.ogg
+echo The Lone Star Custom Profile!
+echo Sleep = conservative 122/122
+echo Wake = ondemandX 230/1305
+}
+
+miuicam17() {
+echo When the MIUI Team opens up their source code, like they are obligated to as they use GPL code, we will include MIUI Camera again. Until then you can find it by searching the web.
+}
+
+noadblock() {
+mount -o remount,rw /system
+cp -f /system/media/hosts/hosts /system/etc/hosts
+chmod 644 /system/etc/hosts
+mount -o remount,ro /system
+echo Restored stock hosts file
+echo Ad Blocking Disabled
+echo Reboot required!
+}
+
+nunhug() {
+mount -o remount,rw /system
+chmod 755 /system/xbin/andrev_oc
+killall andrev_oc
+echo 'conservative' > /system/etc/andrev_oc/sleep_gov
+echo '384000' > /system/etc/andrev_oc/sleep_max
+echo '230400' > /system/etc/andrev_oc/sleep_min
+echo 'ondemand' > /system/etc/andrev_oc/wake_gov
+echo '1228800' > /system/etc/andrev_oc/wake_max
+echo '230400' > /system/etc/andrev_oc/wake_min
+rm  /system/etc/init.d/84fj
+rm  /system/etc/init.d/84fjwmax
+rm  /system/etc/init.d/84fjwmin
+rm  /system/etc/init.d/84fjwgov
+cp -f /system/media/uvscripts/nunhug/84fj /system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/84fj
+/system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/83aroc
+/system/etc/init.d/83aroc
+echo 'The Nun' > /system/media/uvscripts/profile
+mount -o remount,ro /system
+echo The Nun Custom Profile!
+echo Sleep = conservative 230/384
+echo Wake = ondemand 230/1228
+}
+
+ocuvwhat() {
+echo --Current Profile--
+cat /system/media/uvscripts/profile
+echo Sleep Settings:
+cat /etc/andrev_oc/sleep_gov /etc/andrev_oc/sleep_min /etc/andrev_oc/sleep_max
+echo ---
+echo Wake Settings:
+cat /etc/andrev_oc/wake_gov /etc/andrev_oc/wake_min /etc/andrev_oc/wake_max
+echo ---
+echo Undervolt Settings:
+cat /system/media/uvscripts/undervolt
+}
+
+rasroy() {
+mount -o remount,rw /system
+chmod 755 /system/xbin/andrev_oc
+killall andrev_oc
+echo 'conservative' > /system/etc/andrev_oc/sleep_gov
+echo '384000' > /system/etc/andrev_oc/sleep_max
+echo '122000' > /system/etc/andrev_oc/sleep_min
+echo 'ondemandX' > /system/etc/andrev_oc/wake_gov
+echo '1382400' > /system/etc/andrev_oc/wake_max
+echo '122000' > /system/etc/andrev_oc/wake_min
+rm  /system/etc/init.d/84fj
+rm  /system/etc/init.d/84fjwmax
+rm  /system/etc/init.d/84fjwmin
+rm  /system/etc/init.d/84fjwgov
+cp -f /system/media/uvscripts/rasroy/84fj /system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/84fj
+/system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/83aroc
+/system/etc/init.d/83aroc
+echo 'rasroy' > /system/media/uvscripts/profile
+mount -o remount,ro /system
+stagefright -a -o /system/media/uvscripts/rasroy/irie.ogg
+echo rasroy Custom Profile!
+echo Sleep = conservative 122/384
+echo Wake = ondemandX 122/1382
+}
+
+rmcustprof() {
+mount -o remount,rw /system
+chmod 755 /system/xbin/andrev_oc
+killall andrev_oc
+echo '/sys/devices/system/cpu/cpu0/scaling_governor' > /system/etc/andrev_oc/sleep_gov
+echo '/sys/devices/system/cpu/cpu0/scaling_max_freq' > /system/etc/andrev_oc/sleep_max
+echo '/sys/devices/system/cpu/cpu0/scaling_min_freq' > /system/etc/andrev_oc/sleep_min
+echo '/sys/devices/system/cpu/cpu0/scaling_governor' > /system/etc/andrev_oc/wake_gov
+echo '/sys/devices/system/cpu/cpu0/scaling_max_freq' > /system/etc/andrev_oc/wake_max
+echo '/sys/devices/system/cpu/cpu0/scaling_min_freq' > /system/etc/andrev_oc/wake_min
+echo 'No Custom Profile In Use' > /system/media/uvscripts/profile
+chmod 777 /system/etc/init.d/83aroc
+rm  /system/etc/init.d/84fj
+rm  /system/etc/init.d/84fjwmax
+rm  /system/etc/init.d/84fjwmin
+rm  /system/etc/init.d/84fjwgov
+echo '122000' > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo '1075200' > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 'ondemandX' > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+/system/etc/init.d/83aroc
+mount -o remount,ro /system
+echo Reset all Custom Profile Settings and Tweaked Settings to Default Values!
+}
+
+rmsupl() {
+mount -o remount,rw /system
+rm  /system/etc/SuplRootCert
+mount -o remount,ro /system
+echo Removed SuplRootCert!
+}
+
+rmsndmod() {
+mount -o remount,rw /system
+rm -R /system/etc/init.d/84sndmod
+snd3254 -dspmode 0
+mount -o remount,ro /system
+echo Removed Sound Mod!
+echo Reboot suggested.
+}
+
+sloth() {
+mount -o remount,rw /system
+chmod 755 /system/xbin/andrev_oc
+killall andrev_oc
+#rm  /system/etc/init.d/99voltages
+#rm  /system/etc/init.d/01kstune
+#cp /system/media/uvscripts/stock/99voltages /system/etc/init.d/99voltages
+#chmod 777 /system/etc/init.d/99voltages
+#/system/etc/init.d/99voltages
+#rm -R /system/etc/init.d/99voltages
+echo 'conservative' > /system/etc/andrev_oc/sleep_gov
+echo '384000' > /system/etc/andrev_oc/sleep_max
+echo '122000' > /system/etc/andrev_oc/sleep_min
+echo 'ondemand' > /system/etc/andrev_oc/wake_gov
+echo '921600' > /system/etc/andrev_oc/wake_max
+echo '122000' > /system/etc/andrev_oc/wake_min
+rm  /system/etc/init.d/84fj
+rm  /system/etc/init.d/84fjwmax
+rm  /system/etc/init.d/84fjwmin
+rm  /system/etc/init.d/84fjwgov
+cp -f /system/media/uvscripts/sloth/84fj /system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/84fj
+/system/etc/init.d/84fj
+chmod 777 /system/etc/init.d/83aroc
+/system/etc/init.d/83aroc
+echo 'The Sloth' > /system/media/uvscripts/profile
+mount -o remount,ro /system
+echo The Sloth Custom Profile!
+echo Sleep = conservative 122/384
+echo Wake = ondemand 122/921
+}
+
+sndmod() {
+mount -o remount,rw /system
+cp /system/media/dsp/84sndmod /system/etc/init.d/84sndmod
+chmod 755 /system/etc/84sndmod
+/system/etc/init.d/84sndmod
+mount -o remount,ro /system
+echo Installed Sound Mod!
+echo Method snd3254 -dspmode 07 and 11
+}
+
+stockcam() {
+echo Stock CM7 Camera Already Installed!
+}
+
+stuvon(){
+mount -o remount,rw /system
+rm  /system/etc/init.d/99voltages
+rm  /system/etc/init.d/01kstune
+cp /system/media/uvscripts/50uv/99voltages /system/etc/init.d/99voltages
+chmod 777 /system/etc/init.d/99voltages
+/system/etc/init.d/99voltages
+echo 'Absolution Standard Undervolting -50mV' > /system/media/uvscripts/undervolt
+mount -o remount,ro /system
+echo Activated Absolution Standard Undervolting -50mV!
+}
+
+toolschangelog() {
+echo --Changelog--
+cat /system/media/changelog
+echo --End Changelog--
+}
+
+uvoff() {
+mount -o remount,rw /system
+rm  /system/etc/init.d/99voltages
+rm  /system/etc/init.d/01kstune
+chmod 777 /system/media/uvscripts/stock/99voltages
+/system/media/uvscripts/stock/99voltages
+echo 'No Active Undervolt' > /system/media/uvscripts/undervolt
+mount -o remount,ro /system
+echo Undervolt Removed and Deactivated!
+}
+
+volumeplus() {
+mount -o remount,rw /system
+rm  /system/app/DSPManager.apk
+cp /system/media/dsp/VolumePlusFree.apk /data/app/VolumePlusFree.apk
+chmod 644 /data/app/VolumePlusFree.apk
+mount -o remount,ro /system
+echo Installed Volume+ Free!
+}
+
+yesadblock() {
+mount -o remount,rw /system
+cp -f /system/media/hosts/adblockhosts /system/etc/hosts
+chmod 644 /system/etc/hosts
+mount -o remount,ro /system
+echo Installed Custom hosts file
+echo Ad Blocking Enabled
+echo Reboot required to apply changes!
+}
+
+startota() {
+am start -a android.intent.action.MAIN -n com.flappjaxxx.absoota/.OTAActivity
+}
+
+startfjt() {
+am start -a android.intent.action.MAIN -n com.flappjaxxx.tools/.ToolsActivity
+}
+
+upabtools() {
+rm -R /sdcard/absotmp
+mkdir /sdcard/absotmp
+cd /sdcard/absotmp
+echo "Downloading Package Be Patient"
+wget http://theandroidcollective.org/Inspire/Absolution/updates/absotools70-ics.tgz
+echo "Extracting Package"
+tar -xzf absotools70-ics.tgz
+echo "Mounting File Systems"
+mount -o remount,rw /system
+mount -o remount,rw /data
+echo "Removing Old Files"
+rm -R /data/app/com.flappjaxxx.*.apk
+rm -R /data/app/AbsolutionTools*.apk
+rm  /data/app/AbsolutionOTA.apk
+cd /system/bin
+rm  190dpi 192dpi 200dpi 210dpi 220dpi 240dpi absorecovery agguvon callrecorder collrecovery desirehd dspmanager flappjaxxx gallery3d googleapps gpsatt gpsgeneric gpsstock gpstmobile gpsww gpswwa inspire4g liteuvon lonestar miuicam17 noadblock nunhug ocuvwhat rasroy rmcustprof rmsndmod rmsupl sloth sndmod stockcam stuvon toolschangelog uvoff volumeplus yesadblock uuvon talonuvon 25uvon 50uvon androidian cyanbread talonuvlite
+cd /sdcard/absotmp
+echo "Copying New Files"
+cp -R bin /system
+cp -R media /system
+#cp -R xbin /system
+#cp -R etc /system
+echo "Setting Permissions"
+chmod -R 755 /system/media/gpscripts
+chmod -R 755 /system/media/uvscripts
+cp -R /sdcard/absotmp/app /system
+chmod 644 /system/app/AbsolutionTools.apk
+chmod 755 /system/xbin/andrev_oc
+chmod 755 /system/etc/init.d/83aroc
+chmod -R 755 /system/bin
+chmod -R 755 /system/media/tweak
+cd /sdcard
+echo "Waiting for Restart"
+rm -R /sdcard/absotmp
+mount -o remount,ro /system
+am start -a android.intent.action.MAIN -n com.flappjaxxx.absotools/.AbsolutionTools
+echo "Done! AbsolutionTools Updated"
+}
+
+novalauncher() {
+FILE=NovaLauncher_beta.apk
+MD5SUM=10cd118ac944dd55481f43e757b6a531
+URL="http://theandroidcollective.org/Inspire/Absolution/updates/NovaLauncher_beta.apk"
+if [ ! -d /sdcard/tmp ]; then
+  MK=1
+  mkdir -p /sdcard/tmp
+fi
+cd /sdcard/tmp
+if [ -f "$FILE" ]; then
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" != "1" ]; then
+echo "Downloading Package Be Patient"
+  rm  "$FILE"
+  wget "$URL"
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" = "1" ]; then
+echo "Mounting File System"
+  mount -o remount,rw /system
+  cd /
+echo "Copying NovaLauncher to /system/app"
+  cp /sdcard/tmp/NovaLauncher_beta.apk /system/app/NovaLauncher_beta.apk
+echo "Setting Permissions"
+  chmod 644 /system/app/NovaLauncher_beta.apk
+  mount -o remount,ro /system
+  cd - >/dev/null 2>&1
+  echo "Done! Enjoy NovaLauncher!"
+else
+  echo "Failed to download / install NovaLauncher"
+  exit 1
+fi
+rm  /sdcard/tmp/$FILE
+
+if [ "$MK" = "1" ]; then
+  rmdir /sdcard/tmp 
+fi
+}
+
+apexlauncher() {
+FILE=ApexLauncher.apk
+MD5SUM=2ea838cf6e4ffc7873f7add4fb926ae5
+URL="http://theandroidcollective.org/Inspire/Absolution/updates/ApexLauncher.apk"
+if [ ! -d /sdcard/tmp ]; then
+  MK=1
+  mkdir -p /sdcard/tmp
+fi
+cd /sdcard/tmp
+if [ -f "$FILE" ]; then
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" != "1" ]; then
+echo "Downloading Package Be Patient"
+  rm  "$FILE"
+  wget "$URL"
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" = "1" ]; then
+echo "Mounting File System"
+  mount -o remount,rw /system
+  cd /
+echo "Copying ApexLauncher to /system/app"
+  cp /sdcard/tmp/ApexLauncher.apk /system/app/ApexLauncher.apk
+echo "Setting Permissions"
+  chmod 644 /system/app/ApexLauncher.apk
+  mount -o remount,ro /system
+  cd - >/dev/null 2>&1
+  echo "Done! Enjoy ApexLauncher!"
+else
+  echo "Failed to download / install ApexLauncher"
+  exit 1
+fi
+rm  /sdcard/tmp/$FILE
+
+if [ "$MK" = "1" ]; then
+  rmdir /sdcard/tmp 
+fi
+}
+
+treblauncher() {
+FILE=Trebuchet.apk
+MD5SUM=968b4a638ad59fbbe49b53995bade4fb
+URL="http://theandroidcollective.org/Inspire/Absolution/updates/Trebuchet.apk"
+if [ ! -d /sdcard/tmp ]; then
+  MK=1
+  mkdir -p /sdcard/tmp
+fi
+cd /sdcard/tmp
+if [ -f "$FILE" ]; then
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" != "1" ]; then
+echo "Downloading Package Be Patient"
+  rm  "$FILE"
+  wget "$URL"
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" = "1" ]; then
+echo "Mounting File System"
+  mount -o remount,rw /system
+  cd /
+echo "Copying Trebuchet to /system/app"
+  cp /sdcard/tmp/Trebuchet.apk /system/app/Trebuchet.apk
+echo "Setting Permissions"
+  chmod 644 /system/app/Trebuchet.apk
+  mount -o remount,ro /system
+  cd - >/dev/null 2>&1
+  echo "Done! Enjoy Trebuchet!"
+else
+  echo "Failed to download / install Trebuchet"
+  exit 1
+fi
+rm  /sdcard/tmp/$FILE
+
+if [ "$MK" = "1" ]; then
+  rmdir /sdcard/tmp 
+fi
+}
+
+
+#### Main execution
+main() {
+  CMD=$1
+  shift
+
+  #### Recovery mode
+  if [ "$RECOVERY_MODE" = "1" ]; then
+    ALLOWED_CMD=`echo $RECOVERY_CMD_WHITELIST | grep $CMD`
+    if [ "$ALLOWED_CMD" = "" ]; then
+      echo "Command $CMD not allowed in recovery mode"
+      exit 1
+    fi
+  fi
+
+  #### All of supported commands
+  case $CMD in
+
+    "190dpi") 190dpi ;;   # Hardcoded into ABTOOL.apk
+    "192dpi") 192dpi ;;   # *
+    "200dpi") 200dpi ;;   # *
+    "210dpi") 210dpi ;;   # *
+    "220dpi") 220dpi ;;   # Hardcoded into ABTOOL.apk
+    "240dpi") 240dpi ;;   # *
+    "absorecovery") absorecovery ;;   # *
+    "agguvon") agguvon ;;   # *
+    "callrecorder") callrecorder ;;   # Hardcoded into ABTOOL.apk
+    "collrecovery") collrecovery ;;   # *
+    "desirehd") desirehd ;;   # *
+    "dspmanager") dspmanager ;;   # *
+    "flappjaxxx") flappjaxxx ;;   # Hardcoded into ABTOOL.apk
+    "gallery3d") gallery3d ;;   # *
+    "googleapps") googleapps ;;   # *
+    "gpsatt") gpsatt ;;   # *
+    "gpsgeneric") gpsgeneric ;;   # *
+    "gpsstock") gpsstock ;;   # *
+    "gpstmobile") gpstmobile ;;   # *
+    "gpsww") gpsww ;;   # *
+    "gpswwa") gpswwa ;;   # *
+    "inspire4g") inspire4g ;;   # *
+    "liteuvon") liteuvon ;;   # *
+    "lonestar") lonestar ;;   # *
+    "miuicam17") miuicam17 ;;   # *
+    "noadblock") noadblock ;;   # *
+    "nunhug") nunhug ;;   # *
+    "ocuvwhat") ocuvwhat ;;   # *
+    "rasroy") rasroy ;;   # *
+    "rmcustprof") rmcustprof ;;   # *
+    "rmsndmod") rmsndmod ;;   # *
+    "rmsupl") rmsupl ;;   # *
+    "sloth") sloth ;;   # *
+    "sndmod") sndmod ;;   # *
+    "stockcam") stockcam ;;   # *
+    "stuvon") stuvon ;;   # *
+    "toolschangelog") toolschangelog ;;   # *
+    "uvoff") uvoff ;;   # *
+    "volumeplus") volumeplus ;;   # *
+    "yesadblock") yesadblock ;;   # *
+    "startota") startota ;;   # *
+    "startfjt") startfjt ;;   # *
+    "upabtools") upabtools ;;   # *
+    "apexlauncher") apexlauncher ;;   # *
+    "novalauncher") novalauncher ;;   # *
+    "treblauncher") treblauncher ;;   # *
+
+  
+    ### Any other command - we are a wrapper
+    *)            exec $CMD $@ ;;
+    esac
+
+}
+
+## Normal execution - just main
+main $@
+exit $?

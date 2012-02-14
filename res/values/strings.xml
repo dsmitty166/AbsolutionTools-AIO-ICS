@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Yo, AbsolutionTools user!</string>
+    <string name="app_name">Absolution Tools</string>
+    <string-array name="gps_actions_array">
+        <item>gpsatt</item>
+        <item>gpstmobile</item>
+        <item>gpsgeneric</item>
+        <item>gpswwa</item>
+        <item>gpsww</item>
+        <item>rmsupl</item>
+        <item>gpsstock</item>
+        </string-array>
+    <string-array name="gps_descriptions_array">
+        <item>Install ATT GPS Config</item>
+        <item>Install T-Mobile GPS Config</item>
+        <item>Install Generic GPS Config</item>
+        <item>Install Worldwide Alt. GPS Config</item>
+        <item>Install Worldwide 1.3(Older)</item>
+        <item>Remove SuplRootCert</item>
+        <item>Return Stock GPS Config</item>      
+    </string-array>
+    <string-array name="uv_actions_array">
+        <item>ocuvwhat</item>
+        <item>sloth</item>
+        <item>flappjaxxx</item>
+        <item>rasroy</item>
+		<item>nunhug</item>
+		<item>lonestar</item>
+        <item>liteuvon</item>
+        <item>stuvon</item>
+        <item>agguvon</item>
+        <item>uvoff</item>
+        <item>rmcustprof</item>
+    </string-array>
+    <string-array name="uv_descriptions_array">
+        <item>Current CPU Settings</item>
+        <item>sloth Profile</item>
+        <item>flappjaxxx Profile</item>
+        <item>rasroy Profile</item>
+        <item>Nun Profile</item> 
+        <item>Lone Star Profile</item> 
+        <item>Lite Undervolt</item>  
+        <item>Standard Undervolt</item>      
+        <item>Aggressive Undervolt</item>
+        <item>Deactivate Undervolting</item> 
+        <item>Reset to Default</item>
+    </string-array>
+    <string-array name="apps_actions_array">
+        <item>googleapps</item>
+        <item>yesadblock</item>
+        <item>noadblock</item>
+        <item>callrecorder</item>
+        <item>apexlauncher</item>
+        <item>novalauncher</item> 
+        <item>treblauncher</item>  
+        <item>volumeplus</item>
+        <item>dspmanager</item>
+        <item>upabtools</item>
+    </string-array>
+    <string-array name="apps_descriptions_array">
+        <item>Install Google Apps</item>
+        <item>Enable Ad Blocking</item>
+        <item>Disable Ad Blocking</item>
+        <item>Install Call Recorder</item>
+        <item>Install ApexLauncher</item>
+        <item>Install NovaLauncher</item>
+        <item>Install Trebuchet Launcher</item>
+        <item>Use Volume+</item>
+        <item>Use DSP Manager</item> 
+        <item>Update Absolution Tools</item>     
+    </string-array>   
+     <string-array name="extras_actions_array">
+        <item>desirehd</item>
+        <item>inspire4g</item>
+        <item>absorecovery</item>
+        <item>collrecovery</item>
+        <item>sndmod</item>
+        <item>rmsndmod</item>  
+    </string-array>
+    <string-array name="extras_descriptions_array">
+        <item>Desire HD Branding</item>
+        <item>Inspire 4G Branding</item>
+        <item>Flash Absolution Recovery</item>
+        <item>Flash Collective Recovery</item>
+        <item>Apply Sound Mod</item>
+        <item>Remove Sound Mod</item>  
+    </string-array>
+    <string-array name="display_actions_array">
+        <item>190dpi</item>
+        <item>192dpi</item>
+        <item>200dpi</item>
+        <item>210dpi</item>
+        <item>220dpi</item>
+        <item>240dpi</item>    
+    </string-array>
+    <string-array name="display_descriptions_array">
+        <item>190dpi LCD Density</item>
+        <item>192dpi LCD Density</item>
+        <item>200dpi LCD Density</item>
+        <item>210dpi LCD Density</item>
+        <item>220dpi LCD Density</item>
+        <item>240dpi (Stock) LCD Density</item>
+    </string-array>
+    <string name="changelog">Changelog</string>
+    <string name="exit_app">Exit</string>
+    <string name="clear_console">Clear Console</string>
+    <string name="daemon_control">Daemon Controller</string>
+    <string name="update_tools">Update Tools</string>
+    <string name="tweak_app">CPU Tweak</string>
+</resources>

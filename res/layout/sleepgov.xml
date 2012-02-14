@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<TextView 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="Please Choose Sleep Governor"
+    android:padding="10dp"
+    android:textColor="#FFFFFF"
+    />
+    <Button
+            android:id="@+id/buttonlagfree"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="lagfree" />
+    <Button
+            android:id="@+id/buttonondemand"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="ondemand" />
+    <Button
+            android:id="@+id/buttonondemandx"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="ondemandX" />
+    <Button
+            android:id="@+id/buttoninteractive"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="interactive" />
+    <Button
+            android:id="@+id/buttonbrazilian"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="brazilianwax" />
+    <Button
+            android:id="@+id/buttonsmartass2"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="smartassV2" />
+    <Button
+            android:id="@+id/buttonsmartass"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="smartass" />
+    <Button
+            android:id="@+id/buttonminmax"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="minmax" />
+    <Button
+            android:id="@+id/buttonconservative"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="conservative" />
+    <Button
+            android:id="@+id/buttonuserspace"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="userspace" />
+    <Button
+            android:id="@+id/buttonpowersave"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="powersave" />
+    <Button
+            android:id="@+id/buttonperformance"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="performance" />
+</LinearLayout>

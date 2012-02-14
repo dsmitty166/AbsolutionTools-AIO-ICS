@@ -1,0 +1,8 @@
+#!/bin/sh
+rm -rf Absolution*.zip absotools*.tgz
+sleep 3
+cd system
+tar -pczf absotools70-ics.tgz app bin media etc xbin
+mv absotools70-ics.tgz ../absotools70-ics.tgz
+cd ..
+zip -r AbsolutionTools-v8.5-ICS.zip META-INF system shs

@@ -1,0 +1,17 @@
+#!/system/bin/sh
+##3##############################
+# init script for andrev_oc     #
+# created by sybregunne         #
+#################################
+
+package="/data/system/packages.xml"
+strings="ch.amana.android.cputuner com.mhuang.overclocking org.freecoder.widgets.overclock com.antutu.CpuMasterFree"
+if [ -f $package ]; then
+  for str in $strings
+  do
+    if grep $str $package ; then
+      exit 1      
+    fi
+  done
+fi
+/system/xbin/andrev_oc

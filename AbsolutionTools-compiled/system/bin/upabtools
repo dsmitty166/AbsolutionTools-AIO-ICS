@@ -1,0 +1,41 @@
+#!/system/bin/sh
+rm -R /sdcard/absotmp
+mkdir /sdcard/absotmp
+cd /sdcard/absotmp
+echo "Downloading Package Be Patient"
+wget http://theandroidcollective.org/Inspire/Absolution/updates/absotools70-ics.tgz
+echo "Extracting Package"
+tar -xzf absotools70-ics.tgz
+echo "Mounting File Systems"
+mount -o remount,rw /system
+mount -o remount,rw /data
+echo "Removing Old Files"
+rm  /system/bin/startota
+rm  /system/bin/startfjt
+rm -R /data/app/com.flappjaxxx.*.apk
+rm -R /data/app/AbsolutionTools*.apk
+rm  /data/app/AbsolutionOTA.apk
+rm -R /system/media/cameras
+cd /system/bin
+rm  190dpi 192dpi 200dpi 210dpi 220dpi 240dpi absorecovery agguvon callrecorder collrecovery desirehd dspmanager flappjaxxx gallery3d googleapps gpsatt gpsgeneric gpsstock gpstmobile gpsww gpswwa inspire4g liteuvon lonestar miuicam17 noadblock nunhug ocuvwhat rasroy rmcustprof rmsndmod rmsupl sloth sndmod stockcam stuvon toolschangelog uvoff volumeplus yesadblock uuvon talonuvon 25uvon 50uvon androidian cyanbread talonuvlite
+cd /sdcard/absotmp
+echo "Copying New Files"
+cp -R bin /system
+cp -R media /system
+#cp -R xbin /system
+#cp -R etc /system
+echo "Setting Permissions"
+chmod -R 755 /system/media/gpscripts
+chmod -R 755 /system/media/uvscripts
+cp -R /sdcard/absotmp/app /system
+chmod 644 /system/app/AbsolutionTools.apk
+chmod 755 /system/xbin/andrev_oc
+chmod 755 /system/etc/init.d/83aroc
+chmod -R 755 /system/bin
+chmod -R 755 /system/media/tweak
+cd /sdcard
+echo "Waiting for Restart"
+rm -R /sdcard/absotmp
+mount -o remount,ro /system
+am start -a android.intent.action.MAIN -n com.flappjaxxx.absotools/.AbsolutionTools
+echo "Done! AbsolutionTools Updated"

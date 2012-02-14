@@ -1,0 +1,53 @@
+Absolution ICS Changelog:<br><br>
+2/13/2012 v4.0A7 Build 1 ICS Version<br>
+*<u>Tools Updatev8.5</u>*<br>
+--------<br>
+1. Bug Fixes! Ugh!<br>
+<br><br>
+*<u>Tools Update v8.4</u>*<br>
+--------<br>
+1. Added Changelog to Menu options<br>
+<br><br>
+2/13/2012 v4.0A7 Build 1 ICS Version<br>
+--------<br>
+1. Included all changes in changelog not just Tools<br>
+<br>
+2. Compiled from source from latest aospX by existz<br>
+<br>
+3. Added Trebuchet Launcher to Tools<br>
+<br>
+4. Removed old Adobe Flash just get it from the market if you really want flash<br>
+<br><br>
+2/12/2012 v8.1 ICS Version<br>
+--------<br>
+1. More ICS UI integration.<br>
+<br>
+2. Fixed Tweak buttons for 240dpi<br>
+<br>
+3. Color Icons again!<br>
+<br>
+4. New Cool Ass Changelog!<br>
+<br><br>
+2/12/2012 v7.9 ICS Version<br>
+--------<br>
+1. Updated to ICS API<br>
+<br>
+2. Converted all OTA links to point to ICS specific directories<br>
+<br>
+<br>
+2/9/2012 v7.8 ICS Version<br>
+--------<br>
+1. Updated phonegap to v1.4.1 for OTA<br>
+<br>
+2. Updated more links in OTA to point to ICS specific places<br>
+<br>
+3. Updated absotool so Google Apps are safe to install<br>
+<br>
+4. Fixed a couple of minor bugs in absotool<br>
+<br>
+<br>
+2/8/2012 v7.7 ICS Version<br>
+--------<br>
+1. Added NovaLauncher and ApexLauncher Installers<br>
+<br>
+2. Working on ICS specific directories server side.

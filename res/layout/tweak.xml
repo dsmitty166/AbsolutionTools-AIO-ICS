@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/abso_backgroundblk2"
+    >  
+<TextView 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="Sleep Settings"
+    android:padding="0dp"
+    android:textColor="#FFFFFF"
+    />
+<Button
+ android:id="@+id/buttonSleepGov"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:text="Sleep Governor"/>
+<Button
+ android:id="@+id/buttonSleepMin"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:text="Sleep Minimum"/>
+<Button
+ android:id="@+id/buttonSleepMax"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:text="Sleep Maximum"/>
+<TextView 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="Wake Settings"
+    android:padding="0dp"
+    android:textColor="#FFFFFF"
+    />
+<Button
+ android:id="@+id/buttonWakeGov"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:text="Wake Governor"/>
+<Button
+ android:id="@+id/buttonWakeMin"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:text="Wake Minimum"/>
+<Button
+ android:id="@+id/buttonWakeMax"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:text="Wake Maximum"/>
+<!--  <TextView 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text=""
+    android:padding="0dp"
+    android:textColor="#FFFFFF"
+    /> -->
+<Button
+ android:id="@+id/buttonApplySet"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:text="Apply Settings"/>
+</LinearLayout>

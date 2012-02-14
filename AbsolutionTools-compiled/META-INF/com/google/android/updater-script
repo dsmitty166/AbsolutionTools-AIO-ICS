@@ -1,0 +1,23 @@
+set_progress(1.000000);
+
+run_program("/sbin/mount", "/system");
+delete("/system/app/AbsolutionOTA.apk");
+delete("/system/app/FJTools.apk");
+delete("/system/app/AbsolutionTools.apk"); 
+delete("/system/app/AbsolutionTweak.apk"); 
+package_extract_dir("system", "/system");
+set_perm(0, 0, 0755, "/system/bin/absotool");
+set_perm(0, 0, 0755, "/system/bin/upabtools");
+set_perm(0, 0, 0755, "/system/xbin/andrev_oc");
+set_perm(0, 0, 0755, "/system/etc/83aroc");
+set_perm_recursive(0, 2000, 0755, 0750, "/system/media/tweak");
+package_extract_dir("shs", "/system");
+set_perm(0, 0, 0755, "/system/rmoldsh.sh");
+run_program("/system/rmoldsh.sh");
+delete("/system/rmoldsh.sh");
+run_program("/sbin/umount", "/system");
+
+ui_print(" ");
+ui_print("Absolution Tools-ICS Latest Version");
+ui_print("Enjoy");
+ui_print(" ");

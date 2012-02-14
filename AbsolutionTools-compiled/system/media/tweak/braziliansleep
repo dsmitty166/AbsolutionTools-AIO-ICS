@@ -1,0 +1,3 @@
+mount -o remount,rw /system
+echo 'brazilianwax' > /system/etc/andrev_oc/sleep_gov
+

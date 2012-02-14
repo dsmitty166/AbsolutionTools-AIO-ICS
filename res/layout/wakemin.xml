@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<TextView 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="Please Choose Minimum Wake Frequency"
+    android:padding="0dp"
+    android:textColor="#FFFFFF"
+    />
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button122wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="122000" />
+
+        <Button
+            android:id="@+id/button230wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="230400" />
+        </LinearLayout>
+<LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button307wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="307200" />
+
+        <Button
+            android:id="@+id/button384wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="384000" />
+        </LinearLayout>
+<LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button460wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="460800" />
+        <Button
+            android:id="@+id/button537wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="537600" />
+        </LinearLayout>
+<LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button614wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="614400" />
+
+        <Button
+            android:id="@+id/button691wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="691200" />
+        </LinearLayout>
+<LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button768wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="768000" />
+
+        <Button
+            android:id="@+id/button844wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="844800" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button922wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="921600" />
+
+        <Button
+            android:id="@+id/button998wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="998400" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button1075wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1075200" />
+
+        <Button
+            android:id="@+id/button1152wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1152000" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button1228wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1228800" />
+        <Button
+            android:id="@+id/button1305wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1305600" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <Button
+            android:id="@+id/button1382wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1382400" />
+
+        <Button
+            android:id="@+id/button1459wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1459200" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <Button
+            android:id="@+id/button1536wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1536000" />
+
+        <Button
+            android:id="@+id/button1612wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1612800" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button1689wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1689600" />
+
+        <Button
+            android:id="@+id/button1766wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1766400" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <Button
+            android:id="@+id/button1843wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1843200" />
+
+        <Button
+            android:id="@+id/button1920wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1920000" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button1996wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="1996800" />
+    <Button
+            android:id="@+id/button2016wmin"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:textSize="14sp"
+            android:text="2016000" />
+    </LinearLayout>
+</LinearLayout>

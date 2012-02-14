@@ -1,0 +1,2 @@
+mount -o remount,rw /system
+echo '844800' > /system/etc/andrev_oc/sleep_min

@@ -1,0 +1,4 @@
+#!/system/bin/sh
+snd3254 -dspmode 07
+snd3254 -dspmode 11
+
