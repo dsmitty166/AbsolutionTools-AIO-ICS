@@ -50,6 +50,7 @@
         <item>googleapps</item>
         <item>yesadblock</item>
         <item>noadblock</item>
+        <item>absocam</item>
         <item>callrecorder</item>
         <item>apexlauncher</item>
         <item>novalauncher</item> 
@@ -62,6 +63,7 @@
         <item>Install Google Apps</item>
         <item>Enable Ad Blocking</item>
         <item>Disable Ad Blocking</item>
+        <item>Install Abso Camera</item>
         <item>Install Call Recorder</item>
         <item>Install ApexLauncher</item>
         <item>Install NovaLauncher</item>

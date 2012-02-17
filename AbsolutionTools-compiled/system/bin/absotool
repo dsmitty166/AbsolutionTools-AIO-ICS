@@ -954,6 +954,62 @@ if [ "$MK" = "1" ]; then
 fi
 }
 
+absocam() {
+FILE=absocam.tgz
+MD5SUM=8b07965cf77d9aaa4a16f40c26a815e2
+URL="http://theandroidcollective.org/Inspire/Absolution/updates/absocam.tgz"
+if [ ! -d /sdcard/tmp ]; then
+  MK=1
+  mkdir -p /sdcard/tmp
+fi
+cd /sdcard/tmp
+if [ -f "$FILE" ]; then
+MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" != "1" ]; then 
+echo "Downloading Package Be Patient"
+rm  "$FILE"
+wget "$URL"
+  MD5=`md5sum $FILE | awk '{ print $1 }'`
+  if [ "$MD5" = "$MD5SUM" ]; then
+     GOOD=1
+  fi
+fi
+if [ "$GOOD" = "1" ]; then
+  mount -o remount,rw /system
+  cd /
+  rm  /data/app/*AbsoCam*
+  rm  /data/app/*com.androidillusion.videocamillusion*
+  cd /sdcard/tmp
+echo "Extracting Package"
+  tar -xvzf absocam.tgz
+echo "Copying Data"
+  cp /sdcard/tmp/AbsoCamera2.apk /data/app/AbsoCamera2.apk
+  cp /sdcard/tmp/AbsoCameraStill.apk /data/app/AbsoCameraStill.apk
+  cp /sdcard/tmp/AbsoCameraVideo.apk /data/app/AbsoCameraVideo.apk
+echo "Setting Permissions"
+  chmod 644 /data/app/AbsoCamera2.apk
+  chmod 644 /data/app/AbsoCameraStill.apk
+  chmod 644 /data/app/AbsoCameraVideo.apk
+
+  mount -o remount,ro /system
+  cd - >/dev/null 2>&1
+  echo "Done! Enjoy Abso Camera Launcher"
+else
+  echo "Failed to Install Abso Camera Launcher"
+  echo "Try Again"
+  exit 1
+fi
+rm  /sdcard/tmp/$FILE
+rm -R /sdcard/tmp
+
+if [ "$MK" = "1" ]; then
+  rm -R /sdcard/tmp
+fi
+}
 
 #### Main execution
 main() {
@@ -1018,6 +1074,7 @@ main() {
     "apexlauncher") apexlauncher ;;   # *
     "novalauncher") novalauncher ;;   # *
     "treblauncher") treblauncher ;;   # *
+    "absocam") absocam ;;   # *
 
   
     ### Any other command - we are a wrapper
